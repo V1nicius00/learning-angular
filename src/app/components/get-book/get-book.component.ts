@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavComponent } from '../nav/nav.component';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-get-book',
@@ -10,4 +11,11 @@ import { NavComponent } from '../nav/nav.component';
 })
 export class GetBookComponent {
 
+  constructor(private bookService : BookService){}
+
+  getAllBooks(){
+    this.bookService.getAllBooks()
+    .then(books => console.log(books))
+    .catch(error => console.error(error));
+  }
 }
