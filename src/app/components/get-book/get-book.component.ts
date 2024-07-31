@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavComponent } from '../../sharepages/nav/nav.component';
+import { NavComponent } from '../nav/nav.component';
 
 @Component({
   selector: 'app-get-book',
