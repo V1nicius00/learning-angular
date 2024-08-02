@@ -3,7 +3,7 @@
 <form>
     <div class="form-group">
       <label for="bookId">Book ID:</label>
-      <input type="text" class="form-control" id="bookId">
+      <input type="text" class="form-control" name="bookId" [(ngModel)]="bookId">
     </div>
-    <button type="submit" class="btn btn-primary">Delete</button>
+    <button (click)="deleteBook()" type="submit" class="btn btn-primary">Delete</button>
 </form>

@@ -13,4 +13,8 @@ export class BookService {
   getAllBooks(){
     return this.http.get<Book[]>(this.apiUrl).toPromise();
   }
+
+  deleteBook(id: String){
+    return this.http.delete(`${this.apiUrl}/${id}`).toPromise();
+  }
 }
