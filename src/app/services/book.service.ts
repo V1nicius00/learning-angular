@@ -17,4 +17,8 @@ export class BookService {
   deleteBook(id: String){
     return this.http.delete(`${this.apiUrl}/${id}`).toPromise();
   }
+
+  createBook(book: Book){
+    return this.http.post(this.apiUrl, book).toPromise();
+  }
 }
