@@ -4,6 +4,6 @@ export interface Book {
     description: string;
     author: string;
     price: number;
-    releaseDate: string;
+    releaseDate: Date;
     active?: boolean;
 }
