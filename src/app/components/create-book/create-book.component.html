@@ -21,6 +21,6 @@
       <label for="releaseDate">Release date:</label>
       <input type="date" class="form-control" name="releaseDate" [(ngModel)]="releaseDate">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button (click)="createBook()" type="submit" class="btn btn-primary">Submit</button>
   </form>
 
