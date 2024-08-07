@@ -21,4 +21,8 @@ export class BookService {
   createBook(book: Book){
     return this.http.post(this.apiUrl, book).toPromise();
   }
+
+  updateBook(bookId: String, book: Book){
+    return this.http.put(`${this.apiUrl}/${bookId}`, book).toPromise();
+  }
 }
