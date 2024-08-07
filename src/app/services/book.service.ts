@@ -25,4 +25,8 @@ export class BookService {
   updateBook(bookId: String, book: Book){
     return this.http.put(`${this.apiUrl}/${bookId}`, book).toPromise();
   }
+
+  updatePrice(bookId: String, book: Book){
+    return this.http.put(`${this.apiUrl}/price/${bookId}`, book).toPromise();
+  }
 }
