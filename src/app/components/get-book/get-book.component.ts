@@ -13,7 +13,7 @@ export class GetBookComponent {
 
   constructor(private bookService : BookService){}
 
-  getAllBooks(){
+  getAllBooks(): void{
     this.bookService.getAllBooks()
     .then(books => console.log(books))
     .catch(error => console.error(error));
