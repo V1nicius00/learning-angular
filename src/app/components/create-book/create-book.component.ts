@@ -31,9 +31,20 @@ export class CreateBookComponent {
       price: this.price,
       releaseDate: this.releaseDate
     }
+    if(this.validateFields()){
+      this.bookService.createBook(book)
+      .then(book => console.log(book))
+      .catch(error => console.error(error))
+    } else{
+      console.log("Please fill out all the fields")
+    }
+  }
 
-    this.bookService.createBook(book)
-    .then(book => console.log(book))
-    .catch(error => console.error(error))
+  private validateFields(): boolean {
+    return this.bookName.trim() !== '' &&
+    this.author.trim() !== '' &&
+    this.description.trim() !== '' &&
+    this.price > 0 &&
+    this.releaseDate instanceof Date && !isNaN(this.releaseDate.getTime());
   }
 }
