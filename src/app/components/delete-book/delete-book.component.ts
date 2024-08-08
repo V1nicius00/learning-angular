@@ -20,8 +20,14 @@ export class DeleteBookComponent {
   bookId: string = '';
 
   deleteBook(){
-    this.bookService.deleteBook(this.bookId)
-    .then(book => console.log(book))
-    .catch(error => console.error(error));
+    if(this.bookId.trim() !== ''){
+      this.bookService.deleteBook(this.bookId)
+      .then(book => console.log(book))
+      .catch(error => console.error(error));
+    } else {
+      console.log("Book ID field is null")
+    }
   }
+
+
 }
