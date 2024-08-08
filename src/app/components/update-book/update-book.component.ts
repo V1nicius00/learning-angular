@@ -28,24 +28,37 @@ export class UpdateBookComponent {
   releaseDate: Date = new Date();
 
   update(): void{
-    const book = {
-      bookName: this.bookName,
-      author: this.author,
-      description: this.description,
-      price: this.price,
-      releaseDate: this.releaseDate
+    if(this.validateFields()){
+      const book = {
+        bookName: this.bookName,
+        author: this.author,
+        description: this.description,
+        price: this.price,
+        releaseDate: this.releaseDate
+      }
+      switch (this.selectedValue) {
+        case "updateBook":
+          this.updateBook(this.bookId, book)
+          break;
+        case "updatePrice":
+          this.updatePrice(this.bookId, book)
+          break;
+        default:
+          console.error("Unvalid radio value.")
+          break;
+      }
+    } else {
+      console.log("Please fill out all fields.")
     }
-    switch (this.selectedValue) {
-      case "updateBook":
-        this.updateBook(this.bookId, book)
-        break;
-      case "updatePrice":
-        this.updatePrice(this.bookId, book)
-        break;
-      default:
-        console.error("Unvalid radio value.")
-        break;
-    }
+  }
+
+  private validateFields(): boolean {
+    return this.bookId.trim() !== '' &&
+    this.bookName.trim() !== '' &&
+    this.author.trim() !== '' &&
+    this.description.trim() !== '' &&
+    this.price > 0 &&
+    this.releaseDate instanceof Date && !isNaN(this.releaseDate.getTime());
   }
 
   private updateBook(bookId: string, book: Book){
