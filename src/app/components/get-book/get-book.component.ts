@@ -1,21 +1,35 @@
 import { Component } from '@angular/core';
 import { NavComponent } from '../nav/nav.component';
 import { BookService } from '../../services/book.service';
+import { Book } from '../../models/Book';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-get-book',
   standalone: true,
-  imports: [NavComponent],
+  imports: [
+    NavComponent,
+    CommonModule
+  ],
   templateUrl: './get-book.component.html',
   styleUrl: './get-book.component.css'
 })
 export class GetBookComponent {
 
+  data: Book[] = [];
+
   constructor(private bookService : BookService){}
 
-  getAllBooks(): void{
+  ngOnInit(): void{
     this.bookService.getAllBooks()
-    .then(books => console.log(books))
+    .then(books => {
+      if(books){
+        this.data = books
+      } else{
+        this.data = []
+      }
+      console.log(this.data)
+    })
     .catch(error => console.error(error));
   }
 }
