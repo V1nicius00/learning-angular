@@ -2,4 +2,15 @@
 
 <h1>Get all books</h1>
 
-<button (click)="getAllBooks()" class="btn btn-primary">Get all books</button>
+<div *ngIf="data.length > 0; else noData">
+    <ul>
+      <li *ngFor="let book of data">
+        {{ book.bookName }} - {{ book.author }}
+        <!-- Ajuste conforme a estrutura do seu modelo Book -->
+      </li>
+    </ul>
+  </div>
+  <ng-template #noData>
+    <p>No books available.</p>
+  </ng-template>
+  
