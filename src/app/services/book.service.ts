@@ -10,6 +10,10 @@ export class BookService {
 
   constructor(private http : HttpClient) { }
 
+  getBook(id: String){
+    return this.http.get<Book>(`${this.apiUrl}/${id}`).toPromise();
+  }
+
   getAllBooks(){
     return this.http.get<Book[]>(this.apiUrl).toPromise();
   }
