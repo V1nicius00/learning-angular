@@ -15,7 +15,7 @@ export const routes: Routes = [
         component: CreateBookComponent
     },
     {
-        path: "update",
+        path: "update/:id",
         component: UpdateBookComponent
     },
     {
