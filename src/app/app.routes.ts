@@ -4,6 +4,7 @@ import { CreateBookComponent } from './components/create-book/create-book.compon
 import { UpdateBookComponent } from './components/update-book/update-book.component';
 import { GetBookComponent } from './components/get-book/get-book.component';
 import { DeleteBookComponent } from './components/delete-book/delete-book.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: "delete",
         component: DeleteBookComponent
+    },
+    {
+        path: "**",
+        component: PageNotFoundComponent
     }
 ];
