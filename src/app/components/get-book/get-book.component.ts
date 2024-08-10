@@ -33,12 +33,4 @@ export class GetBookComponent {
     .catch(error => console.error(error));
   }
 
-  deleteBook(bookId: string): void {
-    this.bookService.deleteBook(bookId)
-    .then(book => {
-      console.log(book)
-      this.ngOnInit()
-    })
-    .catch(error => console.error(error))
-  }
 }
