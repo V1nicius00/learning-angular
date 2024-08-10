@@ -15,8 +15,8 @@
             <p class="mb-1">{{ book.description }}</p>
             <p class="mb-1 text-muted">Price: ${{ book.price.toFixed(2) }}</p>
             <div class="mt-2 d-flex justify-content-end">
-              <a href="/update" class="btn btn-warning me-2">Update</a>
-              <a href="/delete" class="btn btn-danger">Delete</a>
+              <button class="btn btn-primary me-2">Edit</button>
+              <button class="btn btn-danger" (click)="deleteBook(book.id!)">Delete</button>
             </div>
           </li>
         </ul>
