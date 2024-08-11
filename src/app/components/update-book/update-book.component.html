@@ -3,37 +3,25 @@
 <h1>Update Book</h1>
 
 <form>
-    <label for="updateBook">
-      <input type="radio" name="updateType" value="updateBook" id="updateBook" [(ngModel)]="selectedValue">
-      Update Book
-    </label>
-    <label for="updatePrice">
-      <input type="radio" name="updateType" value="updatePrice" id="updatePrice" [(ngModel)]="selectedValue">
-      Update Price
-    </label>
-    <div class="form-group">
-        <label for="bookId">Book ID:</label>
-        <input type="text" class="form-control" name="bookId" [(ngModel)]="bookId">
-      </div>
     <div class="form-group">
       <label for="bookName">Book name:</label>
-      <input type="text" class="form-control" name="bookName" [(ngModel)]="bookName">
+      <input type="text" class="form-control" id="bookName" name="bookName" [(ngModel)]="book.bookName" required #bookName="ngModel">
     </div>
     <div class="form-group">
       <label for="author">Author name:</label>
-      <input type="text" class="form-control" name="author" [(ngModel)]="author">
+      <input type="text" class="form-control" id="author" name="author" [(ngModel)]="book.author" required #author="ngModel">
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
-      <input type="text" class="form-control" name="description" [(ngModel)]="description">
+      <input type="text" class="form-control" id="description" name="description" [(ngModel)]="book.description" required #description="ngModel">
     </div>
     <div class="form-group">
       <label for="price">Price:</label>
-      <input type="number" class="form-control" name="price" [(ngModel)]="price">
+      <input type="number" class="form-control" id="price" name="price" [(ngModel)]="book.price" required #price="ngModel">
     </div>
     <div class="form-group">
       <label for="releaseDate">Release date:</label>
-      <input type="date" class="form-control" name="releaseDate" [(ngModel)]="releaseDate">
+      <input type="date" class="form-control" id="releaseDate" name="releaseDate" [(ngModel)]="book.releaseDate" required #releaseDate="ngModel">
     </div>
-    <button (click)="update()" type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary" (click)="update()">Update</button>
   </form>
