@@ -3,6 +3,7 @@ import { NavComponent } from '../nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/Book';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -17,58 +18,60 @@ import { Book } from '../../models/Book';
 })
 export class UpdateBookComponent {
 
-  constructor(private booKService : BookService){};
+  constructor(
+    private router : Router,
+    private route : ActivatedRoute,
+    private bookService : BookService
+  ){};
 
-  selectedValue: string = 'updateBook';
-  bookId: string = '';
-  bookName: string = '';
-  author: string = '';
-  description: string = '';
-  price: number = 0;
-  releaseDate: Date = new Date();
+  bookId: string | null = null;
+  book: Book = {
+    id: '',
+    bookName: '',
+    author: '',
+    description: '',
+    price: 0,
+    releaseDate: new Date()
+  };
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.bookId = params.get('id');
+      if(this.bookId){
+        this.bookService.getBook(this.bookId)
+        .then(b => {
+          if(b){
+            this.book = b
+          } else {
+            this.router.navigate(['/not-found'])
+          }
+        })
+        .catch(error => console.error(error))
+      }
+    })
+  }
 
   update(): void{
     if(this.validateFields()){
-      const book = {
-        bookName: this.bookName,
-        author: this.author,
-        description: this.description,
-        price: this.price,
-        releaseDate: this.releaseDate
-      }
-      switch (this.selectedValue) {
-        case "updateBook":
-          this.updateBook(this.bookId, book)
-          break;
-        case "updatePrice":
-          this.updatePrice(this.bookId, book)
-          break;
-        default:
-          console.error("Unvalid radio value.")
-          break;
-      }
+      this.updateBook(this.bookId!, this.book)
+      this.router.navigate(['/'])
     } else {
       console.log("Please fill out all fields.")
     }
   }
 
   private validateFields(): boolean {
-    return this.bookId.trim() !== '' &&
-    this.bookName.trim() !== '' &&
-    this.author.trim() !== '' &&
-    this.description.trim() !== '' &&
-    this.price > 0 &&
-    this.releaseDate instanceof Date && !isNaN(this.releaseDate.getTime());
+    const releaseDate = this.book.releaseDate instanceof Date ? this.book.releaseDate : new Date(this.book.releaseDate);
+
+    return this.book.bookName.trim() !== '' &&
+    this.book.author.trim() !== '' &&
+    this.book.description.trim() !== '' &&
+    this.book.price > 0 &&
+    !isNaN(releaseDate.getTime());
   }
 
   private updateBook(bookId: string, book: Book){
-    this.booKService.updateBook(bookId, book)
-    .then(book => console.log(book))
-    .catch(error => console.error(error))
-  }
-
-  private updatePrice(bookId: string, book: Book){
-    this.booKService.updatePrice(bookId, book)
+    this.bookService.updateBook(bookId, book)
     .then(book => console.log(book))
     .catch(error => console.error(error))
   }
