@@ -15,7 +15,7 @@
             <p class="mb-1">{{ book.description }}</p>
             <p class="mb-1 text-muted">Price: ${{ book.price.toFixed(2) }}</p>
             <div class="mt-2 d-flex justify-content-end">
-              <button class="btn btn-primary me-2">Edit</button>
+              <button class="btn btn-primary me-2" (click)="updateBook(book.id!)">Edit</button>
               <button class="btn btn-danger" (click)="deleteBook(book.id!)">Delete</button>
             </div>
           </li>
