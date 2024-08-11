@@ -3,6 +3,7 @@ import { NavComponent } from '../nav/nav.component';
 import { CommonModule } from '@angular/common';
 import { Book } from '../../models/Book';
 import { BookService } from '../../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -18,7 +19,10 @@ export class HomepageComponent {
 
   data: Book[] = [];
 
-  constructor(private bookService : BookService){}
+  constructor(
+    private router : Router,
+    private bookService : BookService
+  ){}
 
   ngOnInit(): void{
     this.bookService.getAllBooks()
@@ -40,5 +44,9 @@ export class HomepageComponent {
       this.ngOnInit()
     })
     .catch(error => console.error(error))
+  }
+
+  updateBook(bookId: string): void {
+    this.router.navigate(['/update', bookId]);
   }
 }
